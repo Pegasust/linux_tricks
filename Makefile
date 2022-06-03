@@ -7,23 +7,22 @@ ORIGIN_ALIASES=${HOME}/.bashrc_aliases
 INSTALL_DIR=${HOME}/.linux_tricks/
 ENABLE_TRICKS_CMD="alias enable_tricks=\"source ${INSTALL_DIR}/tricks.rc\""
 
-all: build install
+all: install
 
-build: clean_build tricks.rc
-
-install: clean_install build
+install: clean_install clean_build tricks.rc
 	echo ${ORIGIN_ALIASES}
-	cp tricks.rc ~/.linux_tricks/tricks.rc
-	[ ! -f ${ORIGIN_ALIASES} ] && touch ${ORIGIN_ALIASES}
-	! grep ${ORIGIN_ALIASES} "alias enable_tricks" && echo ${ENABLE_TRICKS_CMD}>>${ORIGIN_ALIASES}
-	
+	cp tricks.rc ~/.linux_tricks
+	if [ ! -f ${ORIGIN_ALIASES} ]; then touch ${ORIGIN_ALIASES}; fi
+	if ! grep "alias enable_tricks" ${ORIGIN_ALIASES}; then echo ${ENABLE_TRICKS_CMD}>>${ORIGIN_ALIASES}; fi
+	echo "Installation done. Run source ~/.bashrc" to apply enable_tricks alias
 
 tricks.rc: scripts/short_cwd_display.rc
-	echo "LINUX_TRICKS_INSTALL_DIR=${INSTALL_DIR}">tricks.rc
+	echo "# This file is automatically configured. Any change will not do anything">tricks.rc
+	echo "LINUX_TRICKS_INSTALL_DIR=${INSTALL_DIR}">>tricks.rc
 	cat $^ >>tricks.rc
 
 short_cwd_display_src: scripts/short_cwd_display
-	mkdir -p ${INSTALL_DIR}
+	if [ ! -e ${INSTALL_DIR} ]; then mkdir -p ${INSTALL_DIR}; fi
 	cp -r $^ ${INSTALL_DIR}
 
 scripts/short_cwd_display.rc: short_cwd_display_src

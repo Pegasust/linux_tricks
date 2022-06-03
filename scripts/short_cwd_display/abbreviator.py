@@ -57,8 +57,8 @@ def abbreviate(raw_path: List[str], env_hints: Dict[str, str]=None)->List[str]:
         for c in path:
             pathlet += c
             if pathlet not in all_prefixes:
-                retval.append(pathlet)
                 break
+        retval.append(pathlet)
         path_so_far = os.path.join(path_so_far, path)
     return retval
 

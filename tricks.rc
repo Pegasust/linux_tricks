@@ -1,3 +1,4 @@
+# This file is automatically configured. Any change will not do anything
 LINUX_TRICKS_INSTALL_DIR=/home/ubuntu_admin/.linux_tricks/
 # Run by doing: cd to here, then `source short_cwd_display.rc``
 
