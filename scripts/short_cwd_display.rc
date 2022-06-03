@@ -1,0 +1,14 @@
+# Run by doing: cd to here, then `source short_cwd_display.rc``
+
+# Inspiration: https://unix.stackexchange.com/questions/26844/abbreviated-current-directory-in-shell-prompt
+
+# What I'm improving:
+# - It minimizes directories such that there is no ambiguity when pressing tab
+#   + /etc/hello/hello-world/; /etc/helix/hello/; /etc/hello/hell/
+#   + /e/hell/hello/;          /e/heli/h/;        /e/hell/hell/
+
+# required for persistent location of abbreviator.py
+SHORT_CWD_PWD=$PWD
+PROMPT_COMMAND='PS1X=$($SHORT_CWD_PWD/short_cwd_display/abbreviator.py $PWD)'
+PS1='\u@\h ${PS1X}$ '
+
