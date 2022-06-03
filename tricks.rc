@@ -1,3 +1,4 @@
+LINUX_TRICKS_INSTALL_DIR=/home/ubuntu_admin/.linux_tricks/
 # Run by doing: cd to here, then `source short_cwd_display.rc``
 
 # Inspiration: https://unix.stackexchange.com/questions/26844/abbreviated-current-directory-in-shell-prompt
